@@ -1,25 +1,25 @@
-<p id="notice"><%= notice %></p>
-
 <strong>My Programs:</strong>
 
 <% @programs.each do |day, program| %>
-<a href="#" class="program-title <%= 'active' if program.active? %>">
-    <span class="day"><%= t day %></span>
-</a>
+    <a href="#" class="program-title <%= 'active' if program.active? %>">
+        <span class="day"><%= t day %></span>
+    </a>
 
-<div class="program-details">
-    <% program.excercises.each do |excercise| %>
-        <%= render partial: 'excercise', object: excercise %>
-    <% end %>
+    <div class="program-details">
+        <form action="javascript:void()">
+            <%= hidden_field_tag 'program[day]', day %>
 
-    <form action="javascript:void();">
-        <div class="new-excercise">
-            <%= render partial: 'excercise', object: Excercise.new %>
-            <%= render partial: 'excercise', object: Pause.new %>
-        </div>
-    </form>
+            <% program.excercises.each do |excercise| %>
+                <%= render partial: 'excercise', object: excercise %>
+            <% end %>
 
-    <button type="submit">Save</button>
-    <button class="clear-program">Clear</button>
-</div>
+            <div class="new-excercise">
+                <%= render partial: 'excercise', object: Excercise.new %>
+                <%= render partial: 'excercise', object: Pause.new %>
+            </div>
+
+            <button type="submit">Save</button>
+            <button class="clear-program">Clear</button>
+        </form>
+    </div>
 <% end %>

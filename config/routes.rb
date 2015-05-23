@@ -3,11 +3,9 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :users, only: [ :show ] do
-    member do
-      get 'fetch_programs'
-    end
-  end
+  get '/' => 'users#show'
+  get '/fetch_programs' => 'users#fetch_programs'
+  post '/save_program' => 'users#save_program'
 
   resources :programs
   resources :excercises
