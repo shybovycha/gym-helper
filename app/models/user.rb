@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -10,7 +8,9 @@ class User < ActiveRecord::Base
 
   def get_programs
     Program::DAYS_OF_WEEK.each_with_index.map do |day, day_index|
-        [ day, self.programs.where(day: day_index) ]
+        program = self.programs.includes(:excercises).find_by_day day_index
+
+        [ day, program.present ]
     end.to_h
   end
 
