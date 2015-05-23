@@ -10,8 +10,8 @@ class Excercise < ActiveRecord::Base
         self.preset.present? ? self.preset.image : nil
     end
 
-    def duration_only?
-        false
+    def is_pause?
+        self.name == 'pause'
     end
 
     def as_json

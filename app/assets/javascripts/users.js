@@ -6,4 +6,12 @@ $(function() {
         parent.removeClass('new-excercise');
         parent.after(new_form);
     });
+
+    $('.program-details form').on('submit', function() {
+        $.post('/save_program', $(this).serializeArray(), function(response) {
+            if (response && response['success']) {
+                alert('Saved!');
+            }
+        });
+    });
 });

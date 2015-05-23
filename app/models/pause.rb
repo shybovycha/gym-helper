@@ -13,10 +13,6 @@ class Pause < Excercise
         "Could not assign preset for a Pause other than a Pause"
     end
 
-    def duration_only?
-        true
-    end
-
     def as_json
         {
             name: self.preset.name,

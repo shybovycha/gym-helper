@@ -1,15 +1,17 @@
-<% if excercise.is_a? Pause %>
-    <%= select_tag 'program[excercises][name]', options_for_select(@excercise_presets, excercise.name), include_blank: t('Select an excercise'), disabled: true %>
+<% if excercise.is_pause? %>
+    <%= select_tag 'program[excercises][][name]', options_for_select([[ excercise.name, excercise.name ]]), include_blank: t('No pause') %>
 <% else %>
-    <%= select_tag 'program[excercises][name]', options_for_select(@excercise_presets, excercise.name), include_blank: t('Select an excercise') %>
+    <%= select_tag 'program[excercises][][name]', options_for_select(@excercise_presets, excercise.name), include_blank: t('Select an excercise') %>
 <% end %>
 
-<% unless excercise.duration_only? %>
-    <%= select_tag 'program[excercises][repetitions]', options_for_select(@repetitions, excercise.repetitions), include_blank: t('Repetitions') %>
+<% unless excercise.is_pause? %>
+    <%= select_tag 'program[excercises][][repetitions]', options_for_select(@repetitions, excercise.repetitions), include_blank: t('Repetitions') %>
 
     <span class="sixteen wide column">OR</span>
+<% else %>
+    <%= hidden_field_tag 'program[excercises][][repetitions]', '' %>
 <% end %>
 
-<%= select_tag 'program[excercises][duration]', options_for_select(@durations.map { |secs| [ t(humanize_time(secs)), secs ] }, excercise.duration), include_blank: t('Duration') %>
+<%= select_tag 'program[excercises][][duration]', options_for_select(@durations.map { |secs| [ t(humanize_time(secs)), secs ] }, excercise.duration), include_blank: t('Duration') %>
 
 <br>

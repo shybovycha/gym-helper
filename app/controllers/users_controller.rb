@@ -14,7 +14,13 @@ class UsersController < ApplicationController
   end
 
   def save_program
-    byebug
+    new_program_params = program_params
+    day = new_program_params[:day]
+    old_program = current_user.program_for(day)
+
+    old_program.fill_excercises new_program_params[:excercises]
+
+    render json: { success: true }
   end
 
   def retrieve_auth_token
@@ -35,7 +41,7 @@ class UsersController < ApplicationController
   private
 
     def program_params
-      params.require(:program).permit(:id)
+      params.require(:program).permit(:day, { excercises: [ :name, :repetitions, :duration ] }).deep_symbolize_keys
     end
 
     def set_user
