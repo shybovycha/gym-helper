@@ -14,4 +14,12 @@ $(function() {
             }
         });
     });
+
+    $('.excercise-repetitions').on('change', function() {
+        $(this).parent().find('.excercise-duration').val('');
+    });
+
+    $('.excercise-duration').on('change', function() {
+        $(this).parent().find('.excercise-repetitions').val('');
+    });
 });
