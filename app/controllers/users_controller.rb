@@ -12,9 +12,7 @@ class UsersController < ApplicationController
   end
 
   def fetch_programs
-    user_id = program_params[:user_id]
-    user = User.find(user_id)
-    programs = user.fetch_programs(present_as: :json)
+    programs = current_user.fetch_programs(present_as: :json)
 
     render json: programs
   end
@@ -26,6 +24,6 @@ class UsersController < ApplicationController
     end
 
     def program_params
-      params.require(:user_id)
+      params.permit(:id)
     end
 end
