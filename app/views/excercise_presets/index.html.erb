@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Excercise Presets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @excercise_presets.each do |excercise_preset| %>
+      <tr>
+        <td><%= excercise_preset.name %></td>
+        <td><%= link_to 'Show', excercise_preset %></td>
+        <td><%= link_to 'Edit', edit_excercise_preset_path(excercise_preset) %></td>
+        <td><%= link_to 'Destroy', excercise_preset, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Excercise preset', new_excercise_preset_path %>

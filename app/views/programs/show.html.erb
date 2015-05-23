@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Day:</strong>
+  <%= @program.day %>
+</p>
+
+<p>
+  <strong>Excercises:</strong>
+  <%= @program.excercises %>
+</p>
+
+<%= link_to 'Edit', edit_program_path(@program) %> |
+<%= link_to 'Back', programs_path %>
