@@ -2,7 +2,7 @@ class CreatePrograms < ActiveRecord::Migration
   def change
     create_table :programs do |t|
       t.integer :day
-      t.references :excercises, index: true, foreign_key: true
+      t.integer :user_id, null: false
 
       t.timestamps null: false
     end

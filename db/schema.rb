@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150523113452) do
+ActiveRecord::Schema.define(version: 20150523120224) do
 
   create_table "excercise_presets", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.string   "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150523113452) do
   create_table "excercises", force: :cascade do |t|
     t.integer  "duration"
     t.integer  "repetitions"
+    t.integer  "program_id",          null: false
     t.integer  "excercise_preset_id", null: false
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
@@ -30,19 +31,27 @@ ActiveRecord::Schema.define(version: 20150523113452) do
 
   create_table "programs", force: :cascade do |t|
     t.integer  "day"
-    t.integer  "excercises_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "user_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
-
-  add_index "programs", ["excercises_id"], name: "index_programs_on_excercises_id"
 
   create_table "users", force: :cascade do |t|
-    t.integer  "programs_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
   end
 
-  add_index "users", ["programs_id"], name: "index_users_on_programs_id"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
 end
