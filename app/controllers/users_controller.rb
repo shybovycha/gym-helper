@@ -29,7 +29,7 @@ class UsersController < ApplicationController
       authenticate_user!
     end
 
-    redirect_to "pebble://close#auth_token=#{current_user.auth_token}"
+    redirect_to "pebblejs://close#auth_token=#{current_user.auth_token}"
   end
 
   def fetch_programs
