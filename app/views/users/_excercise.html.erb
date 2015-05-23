@@ -1,0 +1,9 @@
+<form action="javascript:void();" class="new-excercise">
+    <%= select_tag 'excercise_type', options_from_collection_for_select(@excercise_presets, 'id', 'name', excercise.name), include_blank: t('Select an excercise') %>
+
+    <%= select_tag 'excercise_repetitions', options_for_select(@repetitions, excercise.repetitions), include_blank: t('Repetitions') %>
+
+    <span class="sixteen wide column">OR</span>
+
+    <%= select_tag 'excercise_duration', options_for_select(@durations.map { |secs| [ t(distance_of_time_in_words(secs)), secs ] }, excercise.duration), include_blank: t('Duration') %>
+</form>

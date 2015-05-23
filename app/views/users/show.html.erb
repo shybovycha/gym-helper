@@ -1,9 +1,19 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Programs:</strong>
-  <%= @user.programs %>
-</p>
+  <strong>My Programs:</strong>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <% @programs.each do |day, program| %>
+    <a href="#" class="program-title <%= 'active' if program.active? %>">
+        <span class="day"><%= t day %></span>
+    </a>
+
+    <div class="program-details">
+        <% program.excercises.each do |excercise| %>
+            <%= render partial: 'excercise', object: excercise %>
+        <% end %>
+
+        <%= render partial: 'excercise', object: Excercise.new %>
+    </div>
+  <% end %>
+</p>

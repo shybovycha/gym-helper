@@ -6,11 +6,13 @@ class User < ActiveRecord::Base
 
   after_create :init_weekly_programs
 
-  def get_programs
+  def fetch_programs(options = { present_as: :hash })
     Program::DAYS_OF_WEEK.each_with_index.map do |day, day_index|
         program = self.programs.includes(:excercises).find_by_day day_index
 
-        [ day, program.present ]
+        program = program.as_json if options[:present_as] == :json
+
+        [ day, program ]
     end.to_h
   end
 
