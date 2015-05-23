@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def show
     @user = current_user
     @programs = @user.fetch_programs
-    @excercise_presets = ExcercisePreset.all
+    @excercise_presets = ExcercisePreset.all.map { |preset| [ preset.name, preset.name ] }
 
     # repetition times
     @repetitions = [ 1, 2, 3, 5, 7, 10, 15, 20, 25, 30 ].map { |r| [ r, r ] }

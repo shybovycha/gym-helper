@@ -10,6 +10,10 @@ class Excercise < ActiveRecord::Base
         self.preset.present? ? self.preset.image : nil
     end
 
+    def duration_only?
+        false
+    end
+
     def as_json
         {
             name: self.preset.name,

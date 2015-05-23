@@ -1,2 +1,9 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+$(function() {
+    $('.new-excercise select[name=excercise_type]').on('change', function() {
+        var parent = $(this).parent('.new-excercise'),
+            new_form = parent.clone();
+
+        parent.removeClass('new-excercise');
+        parent.after(new_form);
+    });
+});
