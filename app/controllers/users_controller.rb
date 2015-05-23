@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :set_user, except: :retrieve_auth_token
 
   def show
     @user = current_user
@@ -17,6 +17,15 @@ class UsersController < ApplicationController
     byebug
   end
 
+  def retrieve_auth_token
+    unless user_signed_in?
+      session[:return_to] = retrieve_auth_token_path
+      authenticate_user!
+    end
+
+    redirect_to "pebble://close#auth_token=#{current_user.auth_token}"
+  end
+
   def fetch_programs
     programs = current_user.fetch_programs(present_as: :json)
 
@@ -27,5 +36,14 @@ class UsersController < ApplicationController
 
     def program_params
       params.require(:program).permit(:id)
+    end
+
+    def set_user
+      auth_token = params[:auth_token]
+      if auth_token.present?
+        sign_in User.find_by_auth_token(auth_token)
+      else
+        authenticate_user!
+      end
     end
 end

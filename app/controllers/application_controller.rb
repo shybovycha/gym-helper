@@ -3,13 +3,13 @@ class ApplicationController < ActionController::Base
   before_action :save_return_to_param
 
   def after_sign_in_path_for(resource)
-    path = session[:return_to] || user_path(current_user)
+    path = session[:return_to] || user_dashboard_path
     session[:return_to] = nil
     path
   end
 
   def after_sign_up_path_for(resource)
-    path = session[:return_to] || user_path(current_user)
+    path = session[:return_to] || user_dashboard_path
     session[:return_to] = nil
     path
   end
