@@ -8,7 +8,7 @@ class Program < ActiveRecord::Base
     is_active = self.excercises.size > 0
 
     {
-        day: DAYS_OF_WEEK[self.day],
+        #day: DAYS_OF_WEEK[self.day],
         excercises: self.excercises.map(&:as_json),
         active: is_active
     }

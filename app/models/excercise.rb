@@ -15,11 +15,14 @@ class Excercise < ActiveRecord::Base
     end
 
     def as_json
+        repetitions = self.repetitions && "#{self.repetitions} times"
+        duration = self.duration && Time.humanize_timespan(self.duration)
+
         {
             name: self.preset.name,
             image: self.preset.image,
-            duration: self.duration,
-            repetitions: self.repetitions
+            duration: duration,
+            repetitions: repetitions
         }
     end
 end
