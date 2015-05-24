@@ -1161,5 +1161,17 @@ Media queries
 }
 
 .padding-bottom {
-	margin-bottom: 20px;
+	margin-bottom: 50px;
+}
+
+.padding-top {
+	margin-top: 50px;
+}
+
+.font-larger {
+	font-size: 1.5em;
+}
+
+.bg-green {
+	background-color: lightgreen;
 }

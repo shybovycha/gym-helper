@@ -25,13 +25,7 @@ $(function() {
 
     $('#testimonials').height($(document).height());
 
-    $('.edit-program').on('click', function() {
-        debugger;
-    });
-
     window.editProgramFor = function(day) {
-        debugger;
-
         var form = $('.program-form[data-day=' + day + ']'),
             box = $('#program-box');
 
@@ -61,8 +55,7 @@ $(function() {
         var form = $('#program-box form');
 
         form.find('select').val('');
-
-        showProgramFor(form.find('#program_day').val());
+        form.submit();
     };
 
     $('.programs-list .thumbnail').click(function() {

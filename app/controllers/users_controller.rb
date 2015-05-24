@@ -20,7 +20,8 @@ class UsersController < ApplicationController
 
     old_program.fill_excercises new_program_params[:excercises]
 
-    render json: { success: true }
+    #render json: { success: true }
+    redirect_to request.referer
   end
 
   def retrieve_auth_token

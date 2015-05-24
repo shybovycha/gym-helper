@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="hidden program-form" data-day="<%= day %>">
-                        <form action="javascript:void(null)">
+                        <%= form_tag save_program_path, html: { class: 'form-inline' } do %>
                             <%= hidden_field_tag 'program[day]', day %>
 
                             <% program.excercises.each do |excercise| %>
@@ -26,9 +26,9 @@
                                 <%= render partial: 'excercise', object: Pause.new %>
                             </div>
 
-                            <button onClick="submitCurrentProgram()">Save</button>
-                            <button class="clear-program" onClick="clearCurrentProgram()">Clear</button>
-                        </form>
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <button class="clear-program btn btn-danger" onClick="clearCurrentProgram()">Clear</button>
+                        <% end %>
                     </div>
 
                     <div class="hidden program-details" data-day="<%= day %>">
@@ -70,6 +70,20 @@
     </div>
 
     <div class="col-md-9 col-lg-9">
-        <div class="jumbotron hidden" id="program-box"></div>
+        <div class="jumbotron" id="program-box">
+            <h2>Bries instructions</h2>
+
+            <ul class="text-left">
+                <li>
+                    Use the controls on the left to choose the day, you want to set or edit your excercises for.
+                </li>
+
+                <li>
+                    Days, marked with a star, do have a program set already.
+                </li>
+
+                <li>To remove a program, use <strong>Clear</strong> button when editing a program.</li>
+            </ul>
+        </div>
     </div>
 </div>
