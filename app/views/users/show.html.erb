@@ -1,4 +1,4 @@
-<div class="container text-center">
+<div class="container text-center programs-list">
     <% @programs.to_a.in_groups_of(3).each do |group| %>
         <% group.compact! %>
 
@@ -54,4 +54,11 @@
             <% end %>
         </div>
     <% end %>
+</div>
+
+<div class="container">
+    <div class="row col-md-12">
+        <div class="jumbotron hidden" id="program-box">
+        </div>
+    </div>
 </div>

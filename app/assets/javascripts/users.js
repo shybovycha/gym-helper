@@ -24,4 +24,15 @@ $(function() {
     });
 
     $('#testimonials').height($(document).height());
+
+    $('.programs-list .thumbnail').click(function() {
+        var form = $(this).find('.program-form'),
+            details = $(this).find('.program-details'),
+            box = $('#program-box');
+
+        debugger;
+
+        box.html(details.html());
+        box.show();
+    });
 });
