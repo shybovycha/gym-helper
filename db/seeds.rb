@@ -12,7 +12,7 @@ u = User.create! email: 'moo@foo.bar', password: 'moofoo', password_confirmation
 
 puts "Filling sample users with sample program..."
 
-u.program_for('monday').excercises.create! preset: running_preset, duration: 20.minutes
-u.program_for('monday').excercises.create! preset: jumping_preset, repetitions: 30
+u.program_for('monday').excercises.create! preset: running_preset, duration: 10.seconds
+u.program_for('monday').excercises.create! preset: jumping_preset, repetitions: 5
 
 puts "We're ready to rock!"
