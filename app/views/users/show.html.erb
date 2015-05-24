@@ -1,64 +1,75 @@
 <div class="container text-center programs-list">
-    <% @programs.to_a.in_groups_of(3).each do |group| %>
-        <% group.compact! %>
+    <div class="col-md-3 col-lg-3">
+        <% @programs.each do |day, program| %>
+            <div class="col-md-12 col-lg-12">
+                <div class="thumbnail">
+                    <div class="wrapper"></div>
+                    <div class="caption">
+                        <h3>
+                            <%= day.capitalize %>
+                            <% if program.active? %>
+                                <span class="glyphicon glyphicon-star"></span>
+                            <% end %>
+                        </h3>
+                    </div>
 
-        <div class="row">
-            <% group.each do |day, program| %>
-                <div class="col-md-4 col-lg-4 <%= group.size < 3 ? 'col-md-offset-4' : nil %> wow fadeInUp animated">
-                    <div class="thumbnail">
-                        <div class="wrapper"></div>
-                        <div class="caption">
-                            <h3>
-                                <%= day %>
-                                <% if program.active? %>
-                                    <span class="glyphicon glyphicon-star"></span>
-                                <% end %>
-                            </h3>
+                    <div class="hidden program-form" data-day="<%= day %>">
+                        <form action="javascript:void(null)">
+                            <%= hidden_field_tag 'program[day]', day %>
+
+                            <% program.excercises.each do |excercise| %>
+                                <%= render partial: 'excercise', object: excercise %>
+                            <% end %>
+
+                            <div class="new-excercise">
+                                <%= render partial: 'excercise', object: Excercise.new %>
+                                <%= render partial: 'excercise', object: Pause.new %>
+                            </div>
+
+                            <button onClick="submitCurrentProgram()">Save</button>
+                            <button class="clear-program" onClick="clearCurrentProgram()">Clear</button>
+                        </form>
+                    </div>
+
+                    <div class="hidden program-details" data-day="<%= day %>">
+                        <div class="row padding-bottom">
+                            <div class="col-md-10 col-lg-10 text-left">
+                                <h2>Program for <%= day.capitalize %></h2>
+                            </div>
+
+                            <div class="col-md-2 col-lg-2">
+                                <button class="btn btn-primary edit-program" onClick="editProgramFor('<%= day %>')">Edit</button>
+                            </div>
                         </div>
 
-                        <div class="hidden program-form">
-                            <form action="javascript:void(null)">
-                                <%= hidden_field_tag 'program[day]', day %>
-
-                                <% program.excercises.each do |excercise| %>
-                                    <%= render partial: 'excercise', object: excercise %>
-                                <% end %>
-
-                                <div class="new-excercise">
-                                    <%= render partial: 'excercise', object: Excercise.new %>
-                                    <%= render partial: 'excercise', object: Pause.new %>
-                                </div>
-
-                                <button type="submit">Save</button>
-                                <button class="clear-program">Clear</button>
-                            </form>
-                        </div>
-
-                        <div class="hidden program-details">
+                        <% if program.active? %>
                             <% program.excercises.each do |excercise| %>
                                 <div class="panel panel-default">
                                     <div class="panel-body">
-                                        <strong><%= excercise.name %></strong>
+                                        <strong><%= excercise.name.capitalize %>.</strong>
 
                                         <% if excercise.repetitions %>
-                                            <strong>Repeat <%= excercise.repetitions_text %></strong>
+                                            <strong>Repeat <%= excercise.repetitions_text %>.</strong>
                                         <% else %>
-                                            <strong>Perform for <%= excercise.duration_text %></strong>
+                                            <strong>Perform for <%= excercise.duration_text %>.</strong>
                                         <% end %>
                                     </div>
                                 </div>
                             <% end %>
-                        </div>
+                        <% else %>
+                            <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        Nothing planned for <%= day.capitalize %>.
+                                    </div>
+                                </div>
+                        <% end %>
                     </div>
                 </div>
-            <% end %>
-        </div>
-    <% end %>
-</div>
+            </div>
+        <% end %>
+    </div>
 
-<div class="container">
-    <div class="row col-md-12">
-        <div class="jumbotron hidden" id="program-box">
-        </div>
+    <div class="col-md-9 col-lg-9">
+        <div class="jumbotron hidden" id="program-box"></div>
     </div>
 </div>
