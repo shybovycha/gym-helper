@@ -22,4 +22,6 @@ $(function() {
     $('.excercise-duration').on('change', function() {
         $(this).parent().find('.excercise-repetitions').val('');
     });
+
+    $('#testimonials').height($(document).height());
 });

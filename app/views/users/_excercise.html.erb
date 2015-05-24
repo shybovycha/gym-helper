@@ -12,6 +12,6 @@
     <%= hidden_field_tag 'program[excercises][][repetitions]', '' %>
 <% end %>
 
-<%= select_tag 'program[excercises][][duration]', options_for_select(@durations.map { |secs| [ t(humanize_time(secs)), secs ] }, excercise.duration), include_blank: t('Duration'), class: 'excercise-duration' %>
+<%= select_tag 'program[excercises][][duration]', options_for_select(@durations.map { |secs| [ t(Time.humanize_timespan(secs)), secs ] }, excercise.duration), include_blank: t('Duration'), class: 'excercise-duration' %>
 
 <br>

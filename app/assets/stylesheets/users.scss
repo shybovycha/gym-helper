@@ -1,3 +1,17 @@
-// Place all the styles related to the users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+#quote {
+    line-height: 24pt;
+    font-size: 22pt;
+}
+
+.footer-columns .glyphicon {
+    font-size: 2.5em;
+}
+
+.welcome-aboard-btn {
+    padding: 20px;
+}
+
+.registration-form label {
+    color: black;
+    font-size: 10pt;
+}

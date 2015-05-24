@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get '/' => 'users#show', as: :user_dashboard
+  get '/dashboard' => 'users#show', as: :user_dashboard
   get '/fetch_programs' => 'users#fetch_programs'
   post '/save_program' => 'users#save_program'
   get '/retrieve_auth_token' => 'users#retrieve_auth_token', as: :retrieve_auth_token
@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   resources :programs
   resources :excercises
 
-  root 'home#index'
+  root to: 'home#index'
 end

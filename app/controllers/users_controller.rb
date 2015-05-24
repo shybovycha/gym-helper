@@ -46,8 +46,16 @@ class UsersController < ApplicationController
 
     def set_user
       auth_token = params[:auth_token]
+
       if auth_token.present?
-        sign_in User.find_by_auth_token(auth_token)
+        user = User.find_by_auth_token(auth_token)
+
+        if user.blank?
+          authenticate_user!
+          return
+        else
+          sign_in user
+        end
       else
         authenticate_user!
       end
