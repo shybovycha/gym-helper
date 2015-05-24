@@ -1,10 +1,10 @@
 /* ==== Google font ==== */
 @import url('http://fonts.googleapis.com/css?family=Lato:400,300,700,900');
 /* === fontawesome === */
-@import url('font-awesome.css');
+/*@import asset-url('font-awesome.css');*/
 /* ==== overwrite bootstrap standard ==== */
-@import url('overwrite.css');
-@import url('animate.css');
+/*@import asset-url('overwrite.css');
+@import asset-url('animate.css');*/
 /*==========================================================================
   General
   ========================================================================== */
@@ -351,7 +351,7 @@ section.section {
 	background-image: url(../img/How_to_Build_a_Mobile_App.jpg);
 }
 #testimonials{
-	background-image: url('/assets/bg.jpg');
+	background-image: asset-url('bg.jpg');
 	background-position: 50% 50%;
 	background-size:cover;
 	height: 100%;
@@ -1156,8 +1156,8 @@ Media queries
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('/assets/glyphicons-halflings-regular.eot');
-  src: url('/assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('/assets/glyphicons-halflings-regular.woff') format('woff'), url('/assets/glyphicons-halflings-regular.ttf') format('truetype'), url('/assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: asset-url('glyphicons-halflings-regular.eot');
+  src: asset-url('glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), asset-url('glyphicons-halflings-regular.woff') format('woff'), asset-url('glyphicons-halflings-regular.ttf') format('truetype'), asset-url('glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
 .padding-bottom {
