@@ -14,9 +14,17 @@ class Excercise < ActiveRecord::Base
         self.name == 'pause'
     end
 
+    def repetitions_text
+        self.repetitions && "#{self.repetitions} times"
+    end
+
+    def duration_text
+        self.duration && Time.humanize_timespan(self.duration)
+    end
+
     def as_json
-        repetitions_text = self.repetitions && "#{self.repetitions} times"
-        duration_text = self.duration && Time.humanize_timespan(self.duration)
+        repetitions_text = self.repetitions_text
+        duration_text = self.duration_text
 
         {
             name: self.preset.name,

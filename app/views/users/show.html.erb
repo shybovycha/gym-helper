@@ -1,25 +1,57 @@
-<strong>My Programs:</strong>
+<div class="container text-center">
+    <% @programs.to_a.in_groups_of(3).each do |group| %>
+        <% group.compact! %>
 
-<% @programs.each do |day, program| %>
-    <a href="#" class="program-title <%= 'active' if program.active? %>">
-        <span class="day"><%= t day %></span>
-    </a>
+        <div class="row">
+            <% group.each do |day, program| %>
+                <div class="col-md-4 col-lg-4 <%= group.size < 3 ? 'col-md-offset-4' : nil %> wow fadeInUp animated">
+                    <div class="thumbnail">
+                        <div class="wrapper"></div>
+                        <div class="caption">
+                            <h3>
+                                <%= day %>
+                                <% if program.active? %>
+                                    <span class="glyphicon glyphicon-star"></span>
+                                <% end %>
+                            </h3>
+                        </div>
 
-    <div class="program-details">
-        <form action="javascript:void(null)">
-            <%= hidden_field_tag 'program[day]', day %>
+                        <div class="hidden program-form">
+                            <form action="javascript:void(null)">
+                                <%= hidden_field_tag 'program[day]', day %>
 
-            <% program.excercises.each do |excercise| %>
-                <%= render partial: 'excercise', object: excercise %>
+                                <% program.excercises.each do |excercise| %>
+                                    <%= render partial: 'excercise', object: excercise %>
+                                <% end %>
+
+                                <div class="new-excercise">
+                                    <%= render partial: 'excercise', object: Excercise.new %>
+                                    <%= render partial: 'excercise', object: Pause.new %>
+                                </div>
+
+                                <button type="submit">Save</button>
+                                <button class="clear-program">Clear</button>
+                            </form>
+                        </div>
+
+                        <div class="hidden program-details">
+                            <% program.excercises.each do |excercise| %>
+                                <div class="panel panel-default">
+                                    <div class="panel-body">
+                                        <strong><%= excercise.name %></strong>
+
+                                        <% if excercise.repetitions %>
+                                            <strong>Repeat <%= excercise.repetitions_text %></strong>
+                                        <% else %>
+                                            <strong>Perform for <%= excercise.duration_text %></strong>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                </div>
             <% end %>
-
-            <div class="new-excercise">
-                <%= render partial: 'excercise', object: Excercise.new %>
-                <%= render partial: 'excercise', object: Pause.new %>
-            </div>
-
-            <button type="submit">Save</button>
-            <button class="clear-program">Clear</button>
-        </form>
-    </div>
-<% end %>
+        </div>
+    <% end %>
+</div>
